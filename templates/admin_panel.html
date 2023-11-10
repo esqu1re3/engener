@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Panel</title>
+    <style>
+        body {
+            font-family: 'Long Cang', cursive;
+            background-color: #fff2e6;
+            color: #333;
+            text-align: center;
+        }
+        form {
+            display: inline-block;
+            margin-top: 20px;
+        }
+        input[type=text], select {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        input[type=submit] {
+            padding: 10px 20px;
+            background-color: #cc0000;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type=submit]:hover {
+            background-color: #e60000;
+        }
+        .button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #4d4d4d;
+            color: white;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+        }
+        .button:hover {
+            background-color: #666666;
+        }
+        #successMessage {
+            color: #008000;
+            margin: 15px 0;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Admin Panel</h1>
+    <nav>
+        <ul>
+            <li><a href="/add_courier">Add Courier</a></li>
+            <li><a href="/add_category">Add Category</a></li>
+            <li><a href="/add_dish">Add Dish</a></li>
+            <li><a href="/add_promocode">Add PromoCode</a></li>
+        </ul>
+    </nav>
+    <a href="/menu">Show Menu</a>
+</body>
+</html>
