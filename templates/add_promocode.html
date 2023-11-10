@@ -3,10 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title>Add PromoCode</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+    $(document).ready(function(){
+        $('#promocodeForm').on('submit', function(event){
+            event.preventDefault();
+            var form_data = $(this).serialize();
+            $.ajax({
+                url: '/add_promocode',
+                method: 'POST',
+                data: form_data,
+                success: function(response){
+                    $('#successMessage').text('PromoCode added successfully!').show();
+                    $('#code').val('');
+                    $('#discount').val('');
+                }
+            });
+        });
+    });
+    </script>
 </head>
 <body>
     <h1>Add PromoCode</h1>
-    <form method="post">
+    <form id="promocodeForm" method="post">
         <label for="code">Promo Code:</label>
         <input type="text" id="code" name="code" required>
 
@@ -15,6 +34,8 @@
 
         <input type="submit" value="Add PromoCode">
     </form>
-    <a href="/admin">Back to Admin Panel</a>
+    <div id="successMessage" style="display:none;color:green;"></div>
+    <a href="/admin" class="button">Back to Admin Panel</a>
+    <div id="successMessage" style="display:none;color:green;"></div>
 </body>
 </html>
