@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Courier</title>
+    <style>
+        body {
+            font-family: 'Long Cang', cursive;
+            background-color: #fff2e6;
+            color: #333;
+            text-align: center;
+        }
+        form {
+            display: inline-block;
+            margin-top: 20px;
+        }
+        input[type=text], select {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        input[type=submit] {
+            padding: 10px 20px;
+            background-color: #cc0000;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type=submit]:hover {
+            background-color: #e60000;
+        }
+        .button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #4d4d4d;
+            color: white;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+        }
+        .button:hover {
+            background-color: #666666;
+        }
+        #successMessage {
+            color: #008000;
+            margin: 15px 0;
+            display: none;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+    $(document).ready(function(){
+        $('#courierForm').on('submit', function(event){
+            event.preventDefault();
+            var form_data = $(this).serialize();
+            $.ajax({
+                url: '/add_courier',
+                method: 'POST',
+                data: form_data,
+                success: function(response){
+                    $('#successMessage').text('Courier added successfully!').show();
+                    $('#name').val('');
+                }
+            });
+        });
+    });
+    </script>
+</head>
+<body>
+    <h1>Add Courier</h1>
+    <form id="courierForm" method="post">
+        <label for="name">Courier Name:</label>
+        <input type="text" id="name" name="name" required>
+        <input type="submit" value="Add Courier">
+    </form>
+    <div id="successMessage" style="display:none;color:green;"></div>
+    <a href="/admin" class="button">Back to Admin Panel</a>
+    <div id="successMessage" style="display:none;color:green;"></div>
+</body>
+</html>
