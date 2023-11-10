@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Menu</title>
+</head>
+<body>
+    <h1>Menu</h1>
+    {% for category, dishes in menu.items() %}
+        <div class="category">
+            <h2>{{ category }}</h2>
+            <ul>
+                {% for dish in dishes %}
+                    <li>{{ dish.name }} - ${{ '%.2f' | format(dish.price) }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endfor %}
+    <a href="/admin">Back to Admin Panel</a>
+</body>
+</html>

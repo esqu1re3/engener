@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Dish</title>
+</head>
+<body>
+    <h1>Add Dish</h1>
+    <form method="post">
+        <label for="name">Dish Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="price">Price:</label>
+        <input type="text" id="price" name="price" required>
+
+        <label for="category_id">Category:</label>
+        <select id="category_id" name="category_id">
+            {% for category in categories %}
+                <option value="{{ category.id }}">{{ category.name }}</option>
+            {% endfor %}
+        </select>
+
+        <input type="submit" value="Add Dish">
+    </form>
+    <a href="/admin">Back to Admin Panel</a>
+</body>
+</html>
