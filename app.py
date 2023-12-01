@@ -15,41 +15,50 @@ def index():
 # --- Dish Management ---
 @app.route('/add_dish', methods=['GET', 'POST'])
 def add_dish():
+    conn = get_db_connection()
     if request.method == 'POST':
         name = request.form['name']
         price = request.form['price']
         category_id = request.form['category_id']
-        conn = get_db_connection()
-        conn.execute('INSERT INTO dishes (name, price, category_id, sub_category_id) VALUES (?, ?, ?, ?)', (name, price, category_id, sub_category_id))
-        categories = conn.execute('SELECT * FROM categories').fetchall()
-        sub_category = conn.execute('SELECT * FROM sub_category').fetchall()
+        sub_category_id = request.form.get('sub_category_id')  # Optional field
+        conn.execute('INSERT INTO dishes (name, price, category_id, sub_category_id) VALUES (?, ?, ?, ?)', 
+                     (name, price, category_id, sub_category_id))
         conn.commit()
         conn.close()
-        return render_template('add_dish.html', categories=categories, sub_category=sub_category)
-    conn = get_db_connection()
+        return redirect(url_for('index'))
+
     categories = conn.execute('SELECT * FROM categories').fetchall()
+    sub_categories = conn.execute('SELECT * FROM sub_category').fetchall()
     conn.close()
-    return render_template('add_dish.html', categories=categories)
-    
+    return render_template('add_dish.html', categories=categories, sub_categories=sub_categories)
+
 @app.route('/edit_dish/<int:dish_id>', methods=['GET', 'POST'])
 def edit_dish(dish_id):
+    conn = get_db_connection()
     if request.method == 'POST':
-        # Logic to edit a dish
-        conn = get_db_connection()
-        conn.execute('UPDATE dishes SET name = ?, price = ?, category_id = ? WHERE id = ?', (name, price, category_id, dish_id))
+        name = request.form['name']
+        price = request.form['price']
+        category_id = request.form['category_id']
+        sub_category_id = request.form.get('sub_category_id')
+        conn.execute('UPDATE dishes SET name = ?, price = ?, category_id = ?, sub_category_id = ? WHERE id = ?', 
+                     (name, price, category_id, sub_category_id, dish_id))
         conn.commit()
         conn.close()
-        return redirect(url_for('admin_panel'))
-    return render_template('edit_dish.html', dish_id=dish_id)
+        return redirect(url_for('index'))
+
+    dish = conn.execute('SELECT * FROM dishes WHERE id = ?', (dish_id,)).fetchone()
+    categories = conn.execute('SELECT * FROM categories').fetchall()
+    sub_categories = conn.execute('SELECT * FROM sub_category').fetchall()
+    conn.close()
+    return render_template('edit_dish.html', dish=dish, categories=categories, sub_categories=sub_categories)
 
 @app.route('/delete_dish/<int:dish_id>', methods=['POST'])
 def delete_dish(dish_id):
-    # Logic to delete a dish
     conn = get_db_connection()
     conn.execute('DELETE FROM dishes WHERE id = ?', (dish_id,))
     conn.commit()
     conn.close()
-    return redirect(url_for('admin_panel'))
+    return redirect(url_for('index'))
 
 # --- Category Management ---
 
@@ -126,9 +135,9 @@ def delete_courier(courier_id):
 
 @app.route('/couriers')
 def couriers():
-    # Display a list of couriers
     conn = get_db_connection()
-    cur.execute('''Select * from users where role = 'courier''')
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM user WHERE role = 'courier'")
     couriers = cur.fetchall()
     conn.close()
     return render_template('couriers.html', couriers=couriers)
@@ -189,9 +198,9 @@ def delete_branch(branch_id):
 
 @app.route('/branches')
 def branches():
-    # Logic to display a list of branches
     conn = get_db_connection()
-    cur.execute('''Select * from branch''')
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM branch")
     branches = cur.fetchall()
     conn.close()
     return render_template('branches.html', branches=branches)
