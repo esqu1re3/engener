@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Courier</title>
+</head>
+<body>
+    <h1>Edit Courier</h1>
+    <form action="/edit_courier/{{ courier_id }}" method="post">
+        Name: <input type="text" name="name" value="{{ courier.name }}"><br>
+        <input type="submit" value="Save Changes">
+    </form>
+</body>
+</html>

@@ -6,7 +6,7 @@ def create_database():
 
     cur.execute('''CREATE TABLE IF NOT EXISTS user (
                    id INTEGER PRIMARY KEY AUTOINCREMENT,
-                   name TEXT NOT NULL
+                   name TEXT NOT NULL,
                    phone TEXT NOT NULL,
                    role TEXT NOT NULL
                    )''')
