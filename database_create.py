@@ -23,14 +23,17 @@ def create_database():
                    name TEXT NOT NULL,
                    price REAL NOT NULL,
                    category_id INTEGER,
+                   sub_category_id INTEGER, 
                    img_link TEXT,
-                   FOREIGN KEY (category_id) REFERENCES categories (id)
+                   FOREIGN KEY (category_id) REFERENCES categories (id),
+                   FOREIGN KEY (sub_category_id) REFERENCES sub_category (id)
                    )''')
 
     cur.execute('''CREATE TABLE IF NOT EXISTS promocodes (
                    id INTEGER PRIMARY KEY AUTOINCREMENT,
                    code TEXT NOT NULL,
-                   discount REAL NOT NULL
+                   discount REAL NOT NULL,
+                   qr_code BLOB
                    )''')
 
     cur.execute('''CREATE TABLE IF NOT EXISTS orders (
