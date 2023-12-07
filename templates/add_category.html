@@ -11,5 +11,9 @@
         Name: <input type="text" name="name"><br>
         <input type="submit" value="Add Category">
     </form>
+    <h1>Existing Categories</h1>
+        {% for category in categories %}
+        <li>{{ category.name }}</li>
+        {% endfor %}
 </body>
 </html>

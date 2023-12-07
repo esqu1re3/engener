@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Sub Category</title>
+    <style>
+        /* Add your CSS styles here */
+        .container {
+            width: 80%;
+            margin: 0 auto;
+        }
+        .form-group {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Add a New Sub Category</h2>
+        <form action="/add_sub_category" method="POST">
+            <div class="form-group">
+                <label for="name">Sub Category Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="category_id">Category:</label>
+                <select id="category_id" name="category_id" required>
+                    {% for category in categories %}
+                    <option value="{{ category[0] }}">{{ category[1] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit">Add Sub Category</button>
+        </form>
+
+        <h3>Existing Sub Categories</h3>
+        <ul>
+            {% for sub_category in sub_categories %}
+            <li>{{ sub_category[1] }} (sub_category ID: {{ sub_category[2] }})</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

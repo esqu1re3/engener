@@ -10,7 +10,11 @@
     <form action="/add_branch" method="post">
         Branch Name: <input type="text" name="branch_name"><br>
         Address: <input type="text" name="address"><br>
+        Phone: <input type="text" name="phone"><br>
         <input type="submit" value="Add Branch">
     </form>
+    {% if message %}
+    <p>{{ message }}</p>
+    {% endif %}
 </body>
 </html>

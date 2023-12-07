@@ -10,9 +10,21 @@
     <form action="/add_dish" method="post">
         Name: <input type="text" name="name"><br>
         Price: <input type="number" step="0.01" name="price"><br>
-        Category: <select name="category_id"></select><br>
-        Sub Category: <select name="sub_category_id"></select><br>
+        Category: <select name="category_id">
+            {% for category in categories %}
+            <option value="{{ category[0] }}">{{ category[1] }}</option>
+            {% endfor %}
+        </select><br>
+        Sub Category: <select name="sub_category_id">
+            {% for sub_category in sub_categories %}
+            <option value="{{ sub_category[0] }}">{{ sub_category[1] }}</option>
+            {% endfor %}
+        </select><br>
+        Image link: <input type="text" name="image_link"><br>
         <input type="submit" value="Add Dish">
     </form>
+    {% if message %}
+    <p>{{ message }}</p>
+    {% endif %}
 </body>
 </html>

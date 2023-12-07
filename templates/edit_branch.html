@@ -8,8 +8,9 @@
 <body>
     <h1>Edit Branch</h1>
     <form action="/edit_branch/{{ branch_id }}" method="post">
-        Branch Name: <input type="text" name="branch_name" value="{{ branch.name }}"><br>
-        Address: <input type="text" name="address" value="{{ branch.address }}"><br>
+        Branch Name: <input type="text" name="branch_name" value="{{ branch[0] }}"><br>
+        Address: <input type="text" name="address" value="{{ branch[1] }}"><br>
+        Phone: <input type="text" name="phone" value="{{ branch[2] }}"><br>
         <input type="submit" value="Save Changes">
     </form>
 </body>
