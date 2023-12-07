@@ -65,10 +65,7 @@ def delete_dish(dish_id):
     conn.execute('DELETE FROM dishes WHERE id = ?', (dish_id,))
     conn.commit()
     conn.close()
-    conn = get_db_connection()
-    dishes = conn.execute('SELECT * FROM dishes').fetchall()
-    conn.close()
-    return render_template('menu.html', dishes=dishes)
+    return redirect(url_for('menu'))
 
 # --- Category Management ---
 
@@ -92,25 +89,21 @@ def add_category():
 
 @app.route('/edit_category/<int:category_id>', methods=['GET', 'POST'])
 def edit_category(category_id):
+    conn = get_db_connection()
     if request.method == 'POST':
-        # Logic to edit a category
         name = request.form['name']
-        category_id = request.form['category_id']
-        conn = get_db_connection()
         conn.execute('UPDATE categories SET name = ? WHERE id = ?', (name, category_id))
         conn.commit()
         conn.close()
         return redirect(url_for('admin_panel'))
-    # Fetch category details to populate the form
-    conn = get_db_connection()
-    cur.execute('''Select * from categories where id = ?''', (category_id,))
-    category = cur.fetchall()
+    category = conn.execute('SELECT * FROM categories WHERE id = ?', (category_id,)).fetchone()
     conn.close()
+    if category is None:
+        abort(404)  # Category not found
     return render_template('edit_category.html', category=category)
 
 @app.route('/delete_category/<int:category_id>', methods=['POST'])
 def delete_category(category_id):
-    # Logic to delete a category
     conn = get_db_connection()
     conn.execute('DELETE FROM categories WHERE id = ?', (category_id,))
     conn.commit()
