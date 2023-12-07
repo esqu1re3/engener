@@ -4,21 +4,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+        }
+        .nav-list {
+            list-style: none;
+            padding: 0;
+        }
+        .nav-list li {
+            margin-bottom: 10px;
+        }
+        .nav-list a {
+            text-decoration: none;
+            color: #333;
+            padding: 10px 15px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            display: inline-block;
+        }
+        .nav-list a:hover {
+            background-color: #e9e9e9;
+        }
+    </style>
 </head>
 <body>
     <h1>Admin Panel</h1>
-    <nav>
-        <ul>
-            <li><a href="/add_dish">Add Dish</a></li>
-            <li><a href="/add_category">Add Category</a></li>
-            <li><a href="/add_sub_category">Add Sub Category</a></li>
-            <li><a href="/add_courier">Add Courier</a></li>
-            <li><a href="/couriers">View Couriers</a></li>
-            <li><a href="/orders">View Orders</a></li>
-            <li><a href="/add_branch">Add Branch</a></li>
-            <li><a href="/add_promocode">Add Promocode</a></li>
-            <li><a href="/menu">Menu</a></li>
-       </ul>
-    </nav>
+    <ul class="nav-list">
+        <li><a href="/add_dish">Add Dish</a></li>
+        <li><a href="/menu">Manage Dishes</a></li>
+        <li><a href="/add_category">Add Category</a></li>
+        <li><a href="/add_sub_category">Add Sub-Category</a></li>
+        <li><a href="/add_courier">Add Courier</a></li>
+        <li><a href="/couriers">Manage Couriers</a></li>
+        <li><a href="/orders">View Orders</a></li>
+        <li><a href="/add_branch">Add Branch</a></li>
+        <li><a href="/branches">Manage Branches</a></li>
+        <li><a href="/add_promocode">Add Promocode</a></li>
+    </ul>
 </body>
 </html>
