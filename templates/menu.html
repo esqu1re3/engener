@@ -3,31 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
     <title>Menu</title>
-    <style>
-        /* Existing styles... */
-
-        .dish-actions {
-            margin-top: 10px;
-        }
-
-        .dish-actions form {
-            display: inline; /* Display forms inline */
-            margin-right: 5px;
-        }
-
-        .dish-actions button {
-            padding: 5px 10px;
-            border-radius: 5px;
-            border: 1px solid #ddd;
-            background-color: #f8f8f8;
-            cursor: pointer;
-        }
-
-        .dish-actions button:hover {
-            background-color: #e8e8e8;
-        }
-    </style>
 </head>
 <body>
     <div class="container">

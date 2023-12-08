@@ -4,7 +4,7 @@ def create_database():
     conn = sqlite3.connect('cooksoo_cafe.db')
     cur = conn.cursor()
 
-    # Define the user table with role
+
     cur.execute('''CREATE TABLE IF NOT EXISTS user (
                    id INTEGER PRIMARY KEY AUTOINCREMENT,
                    name TEXT NOT NULL,
@@ -12,7 +12,7 @@ def create_database():
                    role TEXT CHECK(role IN ('kitchen', 'administration', 'courier')) NOT NULL
                    )''')
 
-    # Define other tables
+
     cur.execute('''CREATE TABLE IF NOT EXISTS categories (
                    id INTEGER PRIMARY KEY AUTOINCREMENT,
                    name TEXT NOT NULL
